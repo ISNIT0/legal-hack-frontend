@@ -26,7 +26,18 @@ const player = localStorage.player ? JSON.parse(localStorage.player) : {
 
 export async function game() {
     // Load everything we need
-    uw.loadCostume('wall', 'wall.png')
+    uw.loadCostume('wall', 'wall.png');
+    uw.loadCostume('tree', 'tree.png');
+    uw.loadCostume('lake', 'lake.png');
+    uw.loadCostume('greenery', 'greenery.png');
+    uw.loadCostume('stone', 'stone.png');
+    uw.loadCostume('carpet', 'carpet.png');
+    uw.loadCostume('table', 'desk.png');
+    uw.loadCostume('conference-table', 'conference-table.png');
+    uw.loadCostume('presentation', 'presentation.png');
+    uw.loadCostume('kitchen-counter', 'kitchen-counter.png');
+    uw.loadCostume('water-cooler', 'water-cooler.png');
+    uw.loadCostume('fridge', 'fridge.png');
 
     uw.loadSound('kitchen', 'kitchen.mp3')
     uw.loadSound('meeting', 'meeting.mp3')
@@ -58,12 +69,13 @@ export async function game() {
     deskSpace.type = 'room';
     deskSpace.width = roomSize;
     deskSpace.height = roomSize;
-    deskSpace.fill = 'red';
+    deskSpace.fill = 'beige';
     deskSpace.right = 0;
     deskSpace.bottom = 0;
     deskSpace.soundName = 'desk';
     deskSpace.label = new Text;
-    deskSpace.label.text = 'Desk Space';
+    deskSpace.label.text = 'Working';
+    deskSpace.label.scale = 1.4;
     deskSpace.label.posX = deskSpace.posX;
     deskSpace.label.posY = deskSpace.posY;
 
@@ -76,7 +88,8 @@ export async function game() {
     kitchen.top = 0;
     kitchen.soundName = 'kitchen';
     kitchen.label = new Text;
-    kitchen.label.text = 'Kitchen';
+    kitchen.label.text = 'Available for conversation';
+    kitchen.label.scale = 1.4;
     kitchen.label.posX = kitchen.posX;
     kitchen.label.posY = kitchen.posY;
 
@@ -89,7 +102,8 @@ export async function game() {
     pond.top = 0;
     pond.soundName = 'goneFishing';
     pond.label = new Text;
-    pond.label.text = 'Pond';
+    pond.label.text = 'Gone Fishing';
+    pond.label.scale = 1.4;
     pond.label.posX = pond.posX;
     pond.label.posY = pond.posY;
 
@@ -97,12 +111,13 @@ export async function game() {
     meetingRoom.type = 'room';
     meetingRoom.width = roomSize;
     meetingRoom.height = roomSize;
-    meetingRoom.fill = 'pink';
+    meetingRoom.fill = '#800020';
     meetingRoom.left = 0;
     meetingRoom.bottom = 0;
     meetingRoom.soundName = 'meeting';
     meetingRoom.label = new Text;
-    meetingRoom.label.text = 'Meeting Room';
+    meetingRoom.label.text = 'In a meeting';
+    meetingRoom.label.scale = 1.4;
     meetingRoom.label.posX = meetingRoom.posX;
     meetingRoom.label.posY = meetingRoom.posY;
 
@@ -128,8 +143,8 @@ export async function game() {
     playerSprite.forever(() => {
         playerSprite.posX += playerDeltaX;
         playerSprite.posY += playerDeltaY;
-        const touchingObjs = playerSprite.getTouchingFast();
-        if (touchingObjs.filter(a => a.type === 'object').length) {
+        const touchingObjs = playerSprite.getTouching();
+        if (touchingObjs.filter(a => a.type === 'object' && a.collide !== false).length) {
             playerSprite.posX -= playerDeltaX;
             playerSprite.posY -= playerDeltaY;
         }
@@ -270,28 +285,164 @@ function keyHandler(event) {
 
 
 
-const world = [{
-    costume: 'wall',
-    // width: 100,
-    // height: 100,
-    posX: 0,
-    posY: 0,
-    angle: 90
-}, {
-    costume: 'wall',
-    // width: 100,
-    // height: 100,
-    posX: 90,
-    posY: 0,
-    angle: 90
-}, {
-    costume: 'wall',
-    // width: 100,
-    // height: 100,
-    posX: 180,
-    posY: 0,
-    angle: 90
-}];
+const world = [
+    //     {
+    //     costume: 'wall',
+    //     // width: 100,
+    //     // height: 100,
+    //     posX: 0,
+    //     posY: 0,
+    //     angle: 90
+    // }, {
+    //     costume: 'wall',
+    //     // width: 100,
+    //     // height: 100,
+    //     posX: 90,
+    //     posY: 0,
+    //     angle: 90
+    // },
+    // {
+    //     costume: 'wall',
+    //     // width: 100,
+    //     // height: 100,
+    //     posX: 180,
+    //     posY: 0,
+    //     angle: 90
+    // },
+    {
+        costume: 'tree',
+        // width: 100,
+        // height: 100,
+        posX: 800,
+        posY: -100,
+        angle: 0,
+        scale: 2,
+    },
+    {
+        costume: 'lake',
+        // width: 100,
+        // height: 100,
+        posX: 500,
+        posY: -700,
+        angle: 0,
+        scale: 1.2,
+    },
+    {
+        costume: 'greenery',
+        // width: 100,
+        // height: 100,
+        posX: 900,
+        posY: -200,
+        angle: 0,
+        scale: 1.2,
+    },
+    // {
+    //     costume: 'stone',
+    //     // width: 100,
+    //     // height: 100,
+    //     posX: 900,
+    //     posY: -900,
+    //     angle: 0,
+    //     scale: 1.2,
+    // },
+    // {
+    //     costume: 'carpet',
+    //     collide: false,
+    //     // width: 100,
+    //     // height: 100,
+    //     posX: -600,
+    //     posY: 400,
+    //     angle: 0,
+    //     scale: 1.2,
+    // },
+    {
+        costume: 'table',
+        // width: 100,
+        // height: 100,
+        posY: 900,
+        posX: -800,
+        angle: 0,
+        scale: 1.3,
+    },
+    {
+        costume: 'table',
+        // width: 100,
+        // height: 100,
+        posY: 900,
+        posX: -500,
+        angle: 0,
+        scale: 1.3,
+    },
+    {
+        costume: 'table',
+        // width: 100,
+        // height: 100,
+        posY: 900,
+        posX: -200,
+        angle: 0,
+        scale: 1.3,
+    },
+    {
+        costume: 'table',
+        // width: 100,
+        // height: 100,
+        posY: 400,
+        posX: -900,
+        angle: 0,
+        scale: 1.3,
+        angle: -90
+    },
+    {
+        costume: 'conference-table',
+        // width: 100,
+        // height: 100,
+        posY: 400,
+        posX: 500,
+        angle: 0,
+        scale: 1.3,
+        angle: 0
+    },
+    {
+        costume: 'presentation',
+        // width: 100,
+        // height: 100,
+        posY: 890,
+        posX: 500,
+        angle: 0,
+        scale: 2,
+        angle: 0
+    },
+    {
+        costume: 'kitchen-counter',
+        // width: 100,
+        // height: 100,
+        posY: -700,
+        posX: -930,
+        angle: 0,
+        scale: 2,
+        angle: -90,
+    },
+    {
+        costume: 'fridge',
+        // width: 100,
+        // height: 100,
+        posY: -200,
+        posX: -900,
+        angle: 0,
+        scale: 2,
+        angle: 0
+    },
+    {
+        costume: 'water-cooler',
+        // width: 100,
+        // height: 100,
+        posY: -900,
+        posX: -600,
+        angle: 0,
+        scale: 2,
+        angle: 0
+    },
+];
 
 
 function makeWorld() {
