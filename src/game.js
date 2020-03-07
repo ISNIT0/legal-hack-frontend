@@ -1,4 +1,5 @@
 import { LithoHardware } from './litho';
+import config from './config';
 import uw, { World, Sprite, Sound, Rect, Text } from 'you-win';
 import _ from 'lodash';
 
@@ -169,7 +170,7 @@ export async function game() {
         // }
     });
 
-    const ws = new WebSocket('ws://10.25.24.220:8081');
+    const ws = new WebSocket(`ws://${config.domain}`);
 
     ws.onopen = function open() {
         ws.send(JSON.stringify(player));
