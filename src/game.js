@@ -221,14 +221,14 @@ export async function game() {
     ws.onmessage = function incoming(message) {
         const players = JSON.parse(message.data);
         players.forEach(renderPlayer);
-        // const loggedOff = Object.keys(playerSprites).filter(id => !players.find(p => p.id === id));
-        // loggedOff.forEach((id) => {
-        //     playerSprites[id].nameText.destroy();
-        //     playerSprites[id].socialLabel.destroy();
-        //     playerSprites[id].burnoutLabel.destroy();
-        //     playerSprites[id].destroy();
-        //     delete playerSprites[id];
-        // });
+        const loggedOff = Object.keys(playerSprites).filter(id => id !== player.id && !players.find(p => p.id === Number(id)));
+        loggedOff.forEach((id) => {
+            playerSprites[id].nameText.destroy();
+            playerSprites[id].socialLabel.destroy();
+            playerSprites[id].burnoutLabel.destroy();
+            playerSprites[id].destroy();
+            delete playerSprites[id];
+        });
     }
 
 
