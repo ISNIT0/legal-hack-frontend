@@ -10,6 +10,22 @@ let playerDeltaY = 0;
 
 const playerSprites = {};
 
+document.onclick = async function () {
+    if (location.href.includes('litho=true')) {
+        const litho = new LithoHardware();
+        await litho.connect();
+        litho.onStateChangeCallback = function (data) {
+            if (data.touch.x) {
+                playerDeltaX = (data.touch.y - 0.5) * 20;
+                playerDeltaY = (data.touch.x - 0.5) * 20;
+            } else {
+                playerDeltaX = 0;
+                playerDeltaY = 0;
+            }
+        }
+    }
+}
+
 document.addEventListener('keyup', keyHandler);
 document.addEventListener('keydown', keyHandler);
 
@@ -233,7 +249,6 @@ export async function game() {
 
 
     makeWorld();
-
 }
 
 
