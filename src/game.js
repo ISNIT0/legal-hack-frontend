@@ -206,7 +206,7 @@ export async function game() {
         }
         if (room && room.soundName === 'desk') {
             if (player.stats.burnout < 70 && player.stats.social > 30) {
-                player.stats.utilisation = (player.stats.utilisation || 0) + 0.5;
+                player.stats.utilisation = (player.stats.utilisation || 0) + 0.1;
             }
         }
         if (room && room.soundName !== currentSound) {
