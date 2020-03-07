@@ -170,7 +170,7 @@ export async function game() {
         // }
     });
 
-    const ws = new WebSocket(`ws://${config.domain}`);
+    const ws = new WebSocket(`${config.api}`);
 
     ws.onopen = function open() {
         ws.send(JSON.stringify(player));
