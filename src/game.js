@@ -307,13 +307,6 @@ function renderPlayerStats(player) {
     player.utilisationLabel.text = `Utilisation: ${Math.floor(utilisation || 0)}`
     player.utilisationLabel.top = player.burnoutLabel.bottom;
     player.utilisationLabel.posX = player.posX;
-    if (utilisation < 30) {
-        player.utilisationLabel.fill = 'red';
-        player.utilisationLabel.scale = 1.5;
-    } else {
-        player.utilisationLabel.fill = 'black';
-        player.utilisationLabel.scale = 1;
-    }
 }
 
 function keyHandler(event) {
